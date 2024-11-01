@@ -1,4 +1,3 @@
-// src/components/Chat.js
 import React, { useState, useEffect } from "react";
 import {
   collection,
@@ -16,23 +15,20 @@ import {
 } from "../../firebase/Firebase.js";
 import { ref, set, onValue, onDisconnect } from "firebase/database";
 import Loader from "../loader/Loader.jsx";
+
 import "./chatroom.css";
 import { useNavigate } from "react-router-dom";
 
 const MessageSend = () => {
-  // Listen to other user's status in real-time
-
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState("");
   const [otherUserTyping, setOtherUserTyping] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
-  // Redirect user if not authenticated
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate("/");
-
-        // ...
       } else {
         navigate("/signup");
         setIsOnline(false);
@@ -46,7 +42,9 @@ const MessageSend = () => {
 
   // Update typing status
   const updateTypingStatus = (isTyping) => {
-    set(ref(realtimedb, `typingStatus/${currentUser.uid}`), isTyping);
+    if (currentUser) {
+      set(ref(realtimedb, `typingStatus/${currentUser.uid}`), isTyping);
+    }
   };
 
   // Listen for typing status of other users
@@ -64,7 +62,7 @@ const MessageSend = () => {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (!formValue.trim()) return;
+    if (!formValue.trim() || !currentUser) return;
 
     try {
       await addDoc(collection(db, "messages"), {
@@ -89,7 +87,7 @@ const MessageSend = () => {
             <div
               key={msg.id}
               className={`message ${
-                msg.uid === currentUser.uid ? "sent" : "received"
+                msg.uid === currentUser?.uid ? "sent" : "received"
               }`}
             >
               <img src={msg.photoURL} alt="Avatar" className="avatar" />
