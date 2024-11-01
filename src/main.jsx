@@ -8,7 +8,7 @@ import MessageSend from "./MessageSend/MessageSend.jsx";
 
 import Layout from "../Layout.jsx";
 import Login from "./login/Login.jsx";
-import Check from "./Check.jsx";
+
 const router = createBrowserRouter([
   {
     path: "",

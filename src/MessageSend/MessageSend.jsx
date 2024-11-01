@@ -94,11 +94,16 @@ import {
 } from "../../firebase/Firebase.js";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { query, orderBy } from "firebase/firestore";
-import { auth, realtimedb } from "../../firebase/Firebase.js";
+import {
+  auth,
+  realtimedb,
+  onAuthStateChanged,
+} from "../../firebase/Firebase.js";
 import { ref, set, onValue } from "firebase/database";
 import Loader from "../loader/Loader.jsx";
 import "./chatroom.css";
-
+import FontAwesome from "react-fontawesome";
+import { useNavigate } from "react-router-dom";
 const MessageSend = () => {
   const [formValue, setFormValue] = useState("");
   const [typingStatus, setTypingStatus] = useState(false);
@@ -106,12 +111,21 @@ const MessageSend = () => {
   const messageQuery = query(collection(db, "messages"), orderBy("createdAt"));
   const [messages] = useCollectionData(messageQuery, { idField: "id" });
   const currentUser = auth.currentUser;
-
+  const navigate = useNavigate();
   const updateTypingStatus = (isTyping) => {
     const typingRef = ref(realtimedb, `typingStatus/${currentUser.uid}`);
     set(typingRef, isTyping);
   };
-
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        navigate("/");
+      } else {
+        navigate("/Signup");
+      }
+    });
+  });
   useEffect(() => {
     const typingRef = ref(realtimedb, `typingStatus`);
     onValue(typingRef, (snapshot) => {
@@ -200,7 +214,8 @@ const MessageSend = () => {
           className="messageInput"
         />
         <button type="submit" className="sendButton">
-          <i className="fas fa-paper-plane"></i> {/* Font Awesome Icon */}
+          <FontAwesome className="fas fa-paper-plane"></FontAwesome>{" "}
+          {/* Font Awesome Icon */}
         </button>
       </form>
     </div>
