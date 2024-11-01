@@ -105,6 +105,20 @@ import "./chatroom.css";
 import FontAwesome from "react-fontawesome";
 import { useNavigate } from "react-router-dom";
 const MessageSend = () => {
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(user);
+        // ...
+      } else {
+        navigate("/signup");
+        // User is signed out
+        // ...
+      } //ab dosra account banao han
+    });
+  }, []);
+
   const [formValue, setFormValue] = useState("");
   const [typingStatus, setTypingStatus] = useState(false);
   const [otherUserTyping, setOtherUserTyping] = useState(false);
@@ -116,16 +130,7 @@ const MessageSend = () => {
     const typingRef = ref(realtimedb, `typingStatus/${currentUser.uid}`);
     set(typingRef, isTyping);
   };
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user);
-        navigate("/");
-      } else {
-        navigate("/Signup");
-      }
-    });
-  });
+
   useEffect(() => {
     const typingRef = ref(realtimedb, `typingStatus`);
     onValue(typingRef, (snapshot) => {
