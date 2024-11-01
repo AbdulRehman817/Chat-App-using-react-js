@@ -7,52 +7,64 @@ import {
   query,
   db,
   orderBy,
-} from "../../firebase/Firebase.js"; // Adjust path as necessary
+} from "../../firebase/Firebase.js";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { auth, realtimedb } from "../../firebase/Firebase.js"; // Adjust path as necessary
-import { ref, onValue } from "firebase/database";
-import Loader from "../loader/Loader.jsx"; // Adjust path as necessary
+import {
+  auth,
+  realtimedb,
+  onAuthStateChanged,
+} from "../../firebase/Firebase.js";
+import { ref, set, onValue, onDisconnect } from "firebase/database";
+import Loader from "../loader/Loader.jsx";
 import "./chatroom.css";
 import { useNavigate } from "react-router-dom";
 
 const MessageSend = () => {
+  // Listen to other user's status in real-time
+
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState("");
-  const [messages, setMessages] = useState([]);
   const [otherUserTyping, setOtherUserTyping] = useState(false);
+  const [isOnline, setIsOnline] = useState(false);
+  // Redirect user if not authenticated
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+
+        // ...
+      } else {
+        navigate("/signup");
+        setIsOnline(false);
+      }
+    });
+  }, [navigate]);
+
+  const messageQuery = query(collection(db, "messages"), orderBy("createdAt"));
+  const [messages] = useCollectionData(messageQuery, { idField: "id" });
   const currentUser = auth.currentUser;
 
-  // Redirect to signup if not authenticated
-  useEffect(() => {
-    if (!currentUser) {
-      navigate("/signup");
-    }
-  }, [currentUser, navigate]);
+  // Update typing status
+  const updateTypingStatus = (isTyping) => {
+    set(ref(realtimedb, `typingStatus/${currentUser.uid}`), isTyping);
+  };
 
-  // Fetch messages from Firestore and listen for changes
-  const messageQuery = query(collection(db, "messages"), orderBy("createdAt"));
-  const [messagesData] = useCollectionData(messageQuery, { idField: "id" });
-
-  useEffect(() => {
-    setMessages(messagesData || []); // Set messages once fetched
-  }, [messagesData]);
-
-  // Listen for other users' typing status
+  // Listen for typing status of other users
   useEffect(() => {
     const typingRef = ref(realtimedb, `typingStatus`);
     onValue(typingRef, (snapshot) => {
       const typingData = snapshot.val() || {};
-      const isTyping = Object.keys(typingData).some(
-        (uid) => typingData[uid] && uid !== currentUser?.uid
+      setOtherUserTyping(
+        Object.keys(typingData).some(
+          (uid) => uid !== currentUser?.uid && typingData[uid]
+        )
       );
-      setOtherUserTyping(isTyping);
     });
-  }, [currentUser]);
+  }, [currentUser?.uid]);
 
-  // Send a new message
   const sendMessage = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    if (!formValue.trim()) return; // Don't send empty messages
+    e.preventDefault();
+    if (!formValue.trim()) return;
 
     try {
       await addDoc(collection(db, "messages"), {
@@ -62,16 +74,17 @@ const MessageSend = () => {
         displayName: currentUser.displayName || "Anonymous",
         photoURL: currentUser.photoURL,
       });
-      setFormValue(""); // Clear the input field
+      setFormValue("");
+      updateTypingStatus(false);
     } catch (error) {
-      console.error("Error sending message:", error); // Log any errors
+      console.error("Error sending message:", error);
     }
   };
 
   return (
     <div className="chatContainer">
       <div className="messageContainer">
-        {messages.length > 0 ? (
+        {messages ? (
           messages.map((msg) => (
             <div
               key={msg.id}
@@ -79,11 +92,11 @@ const MessageSend = () => {
                 msg.uid === currentUser.uid ? "sent" : "received"
               }`}
             >
-              <img src={msg.photoURL} alt="User Avatar" className="avatar" />
+              <img src={msg.photoURL} alt="Avatar" className="avatar" />
               <div className="messageContent">
                 <strong>{msg.displayName}</strong>
                 <p>{msg.text}</p>
-                <span className="messageTime text-white">
+                <span className="messageTime">
                   {new Date(msg.createdAt?.seconds * 1000).toLocaleTimeString(
                     [],
                     {
@@ -97,7 +110,7 @@ const MessageSend = () => {
             </div>
           ))
         ) : (
-          <Loader /> // Show loader if there are no messages
+          <Loader />
         )}
         {otherUserTyping && (
           <div className="typingIndicator">Someone is typing...</div>
@@ -107,7 +120,10 @@ const MessageSend = () => {
         <input
           type="text"
           placeholder="Type your message..."
-          onChange={(e) => setFormValue(e.target.value)} // Update input value
+          onChange={(e) => {
+            setFormValue(e.target.value);
+            updateTypingStatus(e.target.value !== "");
+          }}
           value={formValue}
           className="messageInput"
         />
