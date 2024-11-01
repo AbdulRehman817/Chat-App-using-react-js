@@ -1,0 +1,82 @@
+.signupDiv {
+  margin: 100px auto; /* Centered horizontally */
+  max-width: 700px; /* Max width for larger screens */
+  width: 90%; /* Full width on smaller screens */
+  background-color: #407074;
+  padding: 20px 30px 40px; /* Adjust padding */
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.signupDiv form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.signupDiv h1 {
+  text-align: center;
+  color: white;
+  font-size: 24px; /* Smaller font size for better mobile appearance */
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="submit"] {
+  height: 60px;
+  outline: none;
+  border: none;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 8px;
+  background-color: white;
+  width: 100%; /* Full width */
+  max-width: 600px; /* Max width */
+  margin: auto; /* Centered */
+}
+
+form input[type="submit"] {
+  background-color: white;
+  cursor: pointer;
+}
+
+a {
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center; /* Center text for better mobile appearance */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .signupDiv {
+    padding: 20px; /* Less padding on smaller devices */
+  }
+  form input[type="text"],
+  form input[type="password"],
+  form input[type="submit"] {
+    width: 100%; /* Full width on small screens */
+    max-width: none; /* Remove max width */
+  }
+  .flex {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons */
+  }
+  .socialButtons button {
+    width: 100%; /* Full width for social buttons */
+    margin-bottom: 10px; /* Space between buttons */
+  }
+}
+
+@media (max-width: 480px) {
+  .signupDiv h1 {
+    font-size: 20px; /* Adjust font size for small devices */
+  }
+}
