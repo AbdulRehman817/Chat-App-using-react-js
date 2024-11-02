@@ -13,6 +13,7 @@ import {
   realtimedb,
   onAuthStateChanged,
 } from "../../firebase/Firebase.js";
+import Navbar from "../Navbar/Navbar.jsx";
 import { ref, set, onValue, onDisconnect } from "firebase/database";
 import Loader from "../loader/Loader.jsx";
 
@@ -80,56 +81,60 @@ const MessageSend = () => {
   };
 
   return (
-    <div className="chatContainer">
-      <div className="messageContainer">
-        {messages ? (
-          messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`message ${
-                msg.uid === currentUser?.uid ? "sent" : "received"
-              }`}
-            >
-              <img src={msg.photoURL} alt="Avatar" className="avatar" />
-              <div className="messageContent">
-                <strong>{msg.displayName}</strong>
-                <p>{msg.text}</p>
-                <span className="messageTime">
-                  {new Date(msg.createdAt?.seconds * 1000).toLocaleTimeString(
-                    [],
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: true,
-                    }
-                  )}
-                </span>
+    <>
+      <Navbar />
+
+      <div className="chatContainer">
+        <div className="messageContainer">
+          {messages ? (
+            messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`message ${
+                  msg.uid === currentUser?.uid ? "sent" : "received"
+                }`}
+              >
+                <img src={msg.photoURL} alt="Avatar" className="avatar" />
+                <div className="messageContent">
+                  <strong>{msg.displayName}</strong>
+                  <p>{msg.text}</p>
+                  <span className="messageTime">
+                    {new Date(msg.createdAt?.seconds * 1000).toLocaleTimeString(
+                      [],
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      }
+                    )}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <Loader />
-        )}
-        {otherUserTyping && (
-          <div className="typingIndicator">Someone is typing...</div>
-        )}
+            ))
+          ) : (
+            <Loader />
+          )}
+          {otherUserTyping && (
+            <div className="typingIndicator">Someone is typing...</div>
+          )}
+        </div>
+        <form onSubmit={sendMessage} className="messageForm">
+          <input
+            type="text"
+            placeholder="Type your message..."
+            onChange={(e) => {
+              setFormValue(e.target.value);
+              updateTypingStatus(e.target.value !== "");
+            }}
+            value={formValue}
+            className="messageInput"
+          />
+          <button type="submit" className="sendButton">
+            Send
+          </button>
+        </form>
       </div>
-      <form onSubmit={sendMessage} className="messageForm">
-        <input
-          type="text"
-          placeholder="Type your message..."
-          onChange={(e) => {
-            setFormValue(e.target.value);
-            updateTypingStatus(e.target.value !== "");
-          }}
-          value={formValue}
-          className="messageInput"
-        />
-        <button type="submit" className="sendButton">
-          Send
-        </button>
-      </form>
-    </div>
+    </>
   );
 };
 

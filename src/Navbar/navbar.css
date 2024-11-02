@@ -1,0 +1,91 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 12px 24px;
+  border-bottom: 1px solid #e6e6e6;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  position: relative;
+  z-index: 10;
+}
+
+.backButton {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #4a90e2; /* Subtle, modern blue */
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.backButton:hover {
+  color: #357abd;
+  transform: scale(1.1);
+}
+
+.chatUserDetails {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding-left: 15px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #d43f52;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatUserName {
+  font-size: 1.4rem;
+  color: #333; /* Dark gray for modern typography */
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.typingStatus {
+  font-size: 0.9rem;
+  color: #1e90ff;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.menuButton {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #4a90e2;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.menuButton:hover {
+  color: #357abd;
+  transform: rotate(90deg);
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chatUserName {
+    font-size: 1.2rem;
+  }
+}

@@ -11,6 +11,8 @@ import {
   serverTimestamp,
   addDoc, // Import addDoc for adding documents
   onSnapshot,
+  getDocs,
+  doc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -76,4 +78,6 @@ export {
   onSnapshot,
   uploadBytesResumable, // Export addDoc for use in the app
   realtimedb,
+  getDocs,
+  doc,
 };
