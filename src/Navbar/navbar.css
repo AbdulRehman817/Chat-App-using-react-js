@@ -1,91 +1,45 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #ffffff;
-  padding: 12px 24px;
-  border-bottom: 1px solid #e6e6e6;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  position: relative;
-  z-index: 10;
+  padding: 10px;
+  background-color: #f5f5f5; /* Change to your desired color */
+  border-bottom: 1px solid #ccc; /* Optional: Add a border */
 }
 
-.backButton {
-  background-color: transparent;
+.icon {
+  cursor: pointer; /* Change cursor to indicate it's clickable */
+  font-size: 24px; /* Adjust size as necessary */
+  padding: 10px;
+  transition: transform 0.3s ease; /* Animation for the icon */
+}
+
+.icon:hover {
+  transform: scale(1.1); /* Scale effect on hover */
+}
+
+.logout {
+  margin-left: auto; /* Push logout button to the right */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.5s ease; /* Smooth transition */
+}
+
+.logout.fade-in {
+  opacity: 1; /* Fully visible when fade-in class is applied */
+}
+
+.logout.fade-out {
+  opacity: 0; /* Fully hidden when fade-out class is applied */
+}
+
+.logout button {
+  background-color: #d43f52; /* Use your primary color */
+  color: white;
   border: none;
-  font-size: 2rem;
-  color: #4a90e2; /* Subtle, modern blue */
+  padding: 8px 16px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: transform 0.3s, color 0.3s;
 }
 
-.backButton:hover {
-  color: #357abd;
-  transform: scale(1.1);
-}
-
-.chatUserDetails {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  padding-left: 15px;
-}
-
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 15px;
-  border: 2px solid #d43f52;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.chatUserName {
-  font-size: 1.4rem;
-  color: #333; /* Dark gray for modern typography */
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.typingStatus {
-  font-size: 0.9rem;
-  color: #1e90ff;
-  font-style: italic;
-  margin-top: 4px;
-}
-
-.menuButton {
-  background-color: transparent;
-  border: none;
-  font-size: 2rem;
-  color: #4a90e2;
-  cursor: pointer;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.menuButton:hover {
-  color: #357abd;
-  transform: rotate(90deg);
-}
-
-@media screen and (max-width: 768px) {
-  .navbar {
-    padding: 10px 20px;
-  }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .chatUserName {
-    font-size: 1.2rem;
-  }
+.logout button:hover {
+  background-color: #b72e3f; /* Darker shade for hover effect */
 }

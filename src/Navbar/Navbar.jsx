@@ -1,71 +1,36 @@
-// import React, { useState, useEffect } from "react";
-// import {
-//   collection,
-//   getDocs,
-//   onAuthStateChanged,
-//   auth,
-// } from "../../firebase/Firebase.js";
-// import { db } from "../../firebase/Firebase";
-// import "./navbar.css";
+import React, { useState } from "react";
+import "./navbar.css";
+import { signOut, auth } from "../../firebase/Firebase";
 
-// const Navbar = ({ currentChatUserId }) => {
-//   const [chatUserName, setChatUserName] = useState(null);
-//   const [chatUserImage, setChatUserImage] = useState(null);
+const Navbar = () => {
+  const [showLogout, setShowLogout] = useState(false); // State to manage visibility of the logout button
 
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged(auth, (user) => {
-//       if (user) {
-//         const userUid = user.uid;
-//         console.log("Authenticated user ID:", userUid);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("User logged out successfully");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
-//         getChatUserData(currentChatUserId);
+  const toggleLogout = () => {
+    setShowLogout((prev) => !prev); // Toggle the logout button's visibility
+  };
 
-//         setChatUserName(user.displayName || "User");
-//         setChatUserImage(user.photoURL || "/default-avatar.png");
-//       } else {
-//         console.log("No authenticated user found.");
-//       }
-//     });
+  return (
+    <div className="navbar">
+      <div className="icon" onClick={toggleLogout}>
+        {/* Replace this with your desired icon */}
+        <span>☰</span>
+      </div>
+      {showLogout && (
+        <div className={`logout ${showLogout ? "fade-in" : "fade-out"}`}>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      )}
+    </div>
+  );
+};
 
-//     return () => unsubscribe();
-//   }, []);
-
-//   useEffect(() => {
-//     if (currentChatUserId) {
-//       console.log("Fetching data for chat user ID:", currentChatUserId);
-//       getChatUserData(currentChatUserId);
-//     }
-//   }, [currentChatUserId]);
-
-//   const getChatUserData = async (chatUserId) => {
-//     try {
-//       const q = collection(db, "userData");
-//       const querySnapshot = await getDocs(q);
-//       querySnapshot.forEach((doc) => {
-//         if (chatUserId === doc.data().id) {
-//           setChatUserName(`${doc.data().firstName} ${doc.data().lastName}`);
-//           setChatUserImage(doc.data().image || "/default-avatar.png");
-//         }
-//       });
-//     } catch (error) {
-//       console.error("Error fetching chat user data:", error);
-//     }
-//   };
-
-//   return (
-//     <div className="navbar">
-//       <button className="backButton">←</button>
-//       <div className="chatUserDetails">
-//         <img src={chatUserImage} alt="Chat User Avatar" className="avatar" />
-//         <div className="userInfo">
-//           <span className="chatUserName">{chatUserName}</span>
-//           <span className="typingStatus">typing.....</span>
-//         </div>
-//       </div>
-
-//       <button className="menuButton">⋮</button>
-//     </div>
-//   );
-// };
-
-// export default Navbar;
+export default Navbar;
