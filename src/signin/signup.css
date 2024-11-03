@@ -80,6 +80,7 @@ a {
   text-decoration: none; /* Remove underline */
   font-weight: 500; /* Font weight for emphasis */
   transition: color 0.3s; /* Smooth transition for color */
+  cursor: pointer;
 }
 
 a:hover {

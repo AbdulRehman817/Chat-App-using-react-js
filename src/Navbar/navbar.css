@@ -2,7 +2,11 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #f5f5f5; /* Change to your desired color */
+  background: linear-gradient(
+    135deg,
+    #f3f4f6,
+    #e0e7ff
+  ); /* Background gradient */
   border-bottom: 1px solid #ccc; /* Optional: Add a border */
 }
 

@@ -18,8 +18,8 @@ body {
 }
 
 .loginContainer {
-  width: 100%;
-  max-width: 400px; /* Max width for the form */
+  width: 110%;
+  max-width: 450px; /* Max width for the form */
   background: white; /* White background for the form */
   border-radius: 20px; /* Rounded corners */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -39,13 +39,12 @@ h1 {
 }
 
 .inputField {
-  margin: 10px 0; /* Space around input fields */
+  margin: 10px 0;
   padding: 12px 15px; /* Padding for input fields */
-  border: 2px solid #ccc; /* Light gray border */
-  border-radius: 10px; /* Rounded corners */
-  width: 100%; /* Full width for inputs */
-  font-size: 16px; /* Font size for inputs */
-  transition: border-color 0.3s, box-shadow 0.3s; /* Transition effects */
+  border: 2px solid #ccc; /* Border style */
+  border-radius: 8px; /* Rounded corners */
+  width: 100%; /* Full width */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
 }
 
 .inputField:focus {
@@ -55,6 +54,8 @@ h1 {
 }
 
 .signupLink {
+  cursor: pointer;
+
   margin: 10px 0; /* Space around the link */
   color: #d43f52; /* Color for the link */
   text-decoration: none; /* Remove underline */

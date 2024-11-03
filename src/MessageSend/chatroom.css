@@ -1,250 +1,136 @@
-/* .chatContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #f7f7f7;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+* {
+  box-sizing: border-box; /* Ensures padding and borders are included in the element's total width and height */
+  margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
 }
 
-.messageContainer {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-.message {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-}
-
-.message.sent {
-  justify-content: flex-end;
-}
-
-.message.received {
-  justify-content: flex-start;
-}
-
-.messageContent {
-  max-width: 80%;
-  padding: 10px;
-  border-radius: 15px;
-  margin: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  word-wrap: break-word;
-}
-
-.message.sent .messageContent {
-  background-color: #007bff;
-  color: white;
-}
-
-.message.received .messageContent {
-  background-color: #e0e0e0;
-  color: black;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin: 0 10px;
-}
-
-.messageTime {
-  font-size: 0.8rem;
-   color: #888; 
-}
-
-.typingIndicator {
-  display: flex;
-  justify-content: flex-start;
-  padding: 10px;
-  font-style: italic;
-  color: #555;
-}
-
-.messageForm {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.messageInput {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-right: 10px;
-  outline: none;
-}
-
-.sendButton {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.sendButton:hover {
-  background-color: #0056b3;
-}
-.typingIndicator {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  color: #555;
-  font-style: italic;
-  margin-bottom: 10px;
-}
-
-.typingIndicator span {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-right: 3px;
-  background-color: #555;
-  border-radius: 50%;
-  animation: typing 4s infinite ease-in-out;
-}
-
-.typingIndicator span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typingIndicator span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes typing {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-} */
-
-/* chatroom.css */
 .chatContainer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background: linear-gradient(135deg, #f3f4f6, #e0e7ff);
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  height: 88vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background: linear-gradient(
+    135deg,
+    #f3f4f6,
+    #e0e7ff
+  ); /* Background gradient */
+  padding: 20px; /* Padding around the chat area */
+  overflow: hidden; /* Prevent overflow */
 }
 
 .messageContainer {
-  flex: 1;
-  overflow-y: auto;
-  padding: 15px;
+  flex: 1; /* Takes the remaining height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 15px; /* Padding inside message container */
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px; /* Space between messages */
 }
 
 .message {
   display: flex;
   align-items: center;
-  padding: 12px;
-  border-radius: 20px;
-  max-width: 60%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, background-color 0.3s;
+  padding: 12px; /* Padding for messages */
+  border-radius: 20px; /* Rounded corners for messages */
+  max-width: 60%; /* Limit the width of messages */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow for messages */
+  transition: transform 0.2s, background-color 0.3s; /* Transition effects */
 }
 
 .message.sent {
-  align-self: flex-end;
-  background-color: #d1f7ff;
+  align-self: flex-end; /* Align sent messages to the right */
+  background-color: #d1f7ff; /* Background color for sent messages */
 }
 
 .message.received {
-  align-self: flex-start;
-  background-color: #f1f0ff;
+  align-self: flex-start; /* Align received messages to the left */
+  background-color: #f1f0ff; /* Background color for received messages */
 }
 
 .message:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Lift effect on hover */
 }
 
 .avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-right: 10px;
+  width: 35px; /* Size of the avatar */
+  height: 35px; /* Size of the avatar */
+  border-radius: 50%; /* Circular avatar */
+  margin-right: 10px; /* Space between avatar and message text */
 }
 
 .messageContent {
-  flex: 1;
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
+  flex: 1; /* Allow the message content to take available space */
+  font-size: 0.95rem; /* Font size for message text */
 }
 
 .messageTime {
-  font-size: 0.7rem;
-  color: #6b7280;
-  margin-top: 3px;
+  font-size: 0.7rem; /* Font size for message time */
+  color: #6b7280; /* Gray color for the time */
+  margin-top: 3px; /* Space above the time */
 }
 
 .typingIndicator {
-  font-style: italic;
-  color: #555;
-  animation: typing-blink 1.5s infinite;
+  font-style: italic; /* Italic for typing indicator */
+  color: #555; /* Color for typing indicator */
+  animation: typing-blink 1.5s infinite; /* Blinking animation */
 }
 
 @keyframes typing-blink {
   0%,
   100% {
-    opacity: 1;
+    opacity: 1; /* Fully visible */
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.5; /* Half visible */
   }
 }
 
 .messageForm {
   display: flex;
   align-items: center;
-  border-top: 1px solid #e5e7eb;
   padding: 10px;
-  background-color: #f9fafb;
-  border-radius: 10px;
+  margin: 0px -5px;
+  /* Slightly transparent background */
+  background-color: transparent;
+  border-radius: 20px; /* Rounded corners for the input area */
 }
 
 .messageInput {
   flex: 1;
-  padding: 12px;
-  border: 2px solid #d1d5db;
-  border-radius: 30px;
-  outline: none;
-  background-color: #f3f4f6;
-  transition: border-color 0.3s;
+  padding: 15px; /* More padding for a comfortable feel */
+  border: none; /* No border */
+  border-radius: 25px; /* Rounded input field */
+  outline: none; /* No outline */
+  background-color: #f3f4f6; /* Light background color for input */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+  font-size: 1rem; /* Font size for input */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow for input */
 }
 
 .messageInput:focus {
-  border-color: #3b82f6;
+  background-color: #e0e7ff; /* Change background on focus */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on focus */
 }
 
 .sendButton {
-  background-color: #3b82f6;
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  margin-left: 10px;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-  transition: background-color 0.3s, transform 0.2s;
+  width: 70px;
+  background-color: #3b82f6; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* No border */
+  padding: 12px 18px; /* Padding for the button */
+  margin-left: 12px; /* Space between input and button */
+  border-radius: 25px; /* Rounded button */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); /* Button shadow */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  font-size: 0.9rem; /* Slightly smaller font size for button */
 }
 
 .sendButton:hover {
-  background-color: #2563eb;
-  transform: scale(1.05);
+  background-color: #2563eb; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.sendButton:active {
+  background-color: #1d4ed8; /* Even darker shade when button is pressed */
 }
