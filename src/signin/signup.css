@@ -1,153 +1,113 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", sans-serif; /* Modern font */
+  background: linear-gradient(
+    135deg,
+    #f0f4f8 30%,
+    #e1e7f2 100%
+  ); /* Gradient background */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .signupDiv {
-  margin: 50px auto; /* Center the signupDiv */
-  max-width: 700px; /* Maximum width for larger screens */
-  width: 90%; /* Make width responsive */
-  background-color: #407074; /* Background color */
-  padding: 20px; /* Adjust padding */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white; /* White background for the form */
+  border-radius: 15px; /* More pronounced rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow for a card effect */
+  padding: 40px 30px; /* Increased padding for more space */
+  width: 100%;
+  max-width: 400px; /* Set a maximum width */
+  transition: transform 0.3s; /* Animation for hover effect */
 }
 
-.signupDiv form {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack items vertically */
-  gap: 20px; /* Space between form elements */
+.signupDiv:hover {
+  transform: scale(1.02); /* Slight scaling on hover for modern feel */
 }
 
-.signupDiv h1 {
-  text-align: center; /* Center text */
-  color: white; /* Text color */
-  font-size: 31px; /* Font size for heading */
-  font-weight: bold; /* Bold font */
+h1 {
+  font-size: 28px; /* Increased font size for header */
+  color: #333; /* Darker text color */
+  margin-bottom: 20px; /* Space below heading */
+  text-align: center; /* Center heading */
 }
 
-form input[type="text"],
-  form input[type="password"],
-  /* form input[type="file"], */
-  form input[type="submit"] {
-  height: 50px; /* Height of input fields */
-  outline: none; /* Remove outline */
-  border: none; /* Remove border */
-  padding: 0 15px; /* Padding inside input */
-  font-size: 16px; /* Font size */
-  font-weight: 400; /* Font weight */
-  color: #333; /* Text color */
+input[type="file"] {
+  margin: 10px 0;
+  border: 2px dashed #d43f52; /* Dashed border for file input */
   border-radius: 8px; /* Rounded corners */
-  background-color: white; /* Background color for inputs */
+  padding: 10px;
+  width: 100%; /* Full width */
+  cursor: pointer; /* Pointer cursor */
+  background-color: #f9f9f9; /* Light background */
+  transition: border-color 0.3s; /* Smooth transition */
 }
 
-form input[type="submit"] {
-  background-color: #d43f52; /* Background color for submit button */
-  color: white; /* Text color for submit button */
-  cursor: pointer; /* Pointer cursor on hover */
+input[type="file"]:hover {
+  border-color: #b72e3f; /* Darker border on hover */
+}
+
+input[type="text"],
+input[type="password"] {
+  margin: 10px 0;
+  padding: 12px 15px; /* Padding for input fields */
+  border: 2px solid #ccc; /* Border style */
+  border-radius: 8px; /* Rounded corners */
+  width: 100%; /* Full width */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #d43f52; /* Border color on focus */
+  box-shadow: 0 0 5px rgba(212, 63, 82, 0.5); /* Shadow on focus */
+  outline: none; /* Remove default outline */
 }
 
 a {
-  text-align: center; /* Center the link */
-  font-size: 15px; /* Font size for the link */
-  cursor: pointer; /* Pointer cursor on hover */
+  display: block; /* Make link block to occupy full width */
+  margin: 10px 0; /* Space around the link */
+  color: #d43f52; /* Link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: 500; /* Font weight for emphasis */
+  transition: color 0.3s; /* Smooth transition for color */
 }
 
-/* Alert styles */
-.alert {
-  text-align: center; /* Center text */
+a:hover {
+  color: #b72e3f; /* Darker shade on hover */
+  text-decoration: underline; /* Underline on hover */
+}
+
+button {
+  background-color: #d43f52; /* Primary color for button */
   color: white; /* Text color */
-  margin-top: 10px; /* Space above alert */
-}
-
-/* Text for OR */
-.orText {
-  text-align: center;
-  color: white;
-}
-
-/* Social buttons styling */
-.socialButtons {
-  display: flex;
-  justify-content: space-between; /* Space between buttons */
-}
-
-.googleBtn,
-.githubBtn {
-  flex: 1; /* Equal width for buttons */
-  padding: 15px; /* Padding inside buttons */
-  margin: 0 10px; /* Space between buttons */
-  color: white; /* Text color */
-  border: none; /* Remove border */
+  border: none; /* No border */
   border-radius: 8px; /* Rounded corners */
-  font-size: 15px; /* Font size */
+  padding: 12px; /* Padding inside button */
   cursor: pointer; /* Pointer cursor */
+  width: 100%; /* Full width */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
 }
 
-.googleBtn {
-  background-color: #4285f4; /* Google button color */
+button:hover {
+  background-color: #b72e3f; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
 }
 
-.githubBtn {
-  background-color: #24292f; /* GitHub button color */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  /* For tablets */
-  .signupDiv {
-    margin: 20px; /* Reduce margins */
-    padding: 15px; /* Adjust padding */
-  }
-
-  form {
-    gap: 15px; /* Reduce gap between elements */
-  }
-
-  form h1 {
-    font-size: 24px; /* Adjust header size */
-  }
-
-  form input[type="text"],
-    form input[type="password"],
-    /* form input[type="file"], */
-    form input[type="submit"] {
-    height: 45px; /* Slightly smaller height */
-    font-size: 15px; /* Slightly smaller font size */
-  }
-
-  a {
-    font-size: 14px; /* Smaller font size for link */
-  }
-}
-
-@media (max-width: 480px) {
-  /* For mobile devices */
-  .signupDiv {
-    width: 95%; /* More width on mobile */
-    padding: 10px; /* Less padding */
-  }
-
-  form {
-    gap: 10px; /* Further reduce gap for mobile */
-  }
-
-  form h1 {
-    font-size: 20px; /* Smaller header size */
-  }
-
-  form input[type="text"],
-    form input[type="password"],
-    /* form input[type="file"], */
-    form input[type="submit"] {
-    height: 40px; /* Smaller height for inputs */
-    font-size: 14px; /* Smaller font size */
-  }
-
-  a {
-    font-size: 12px; /* Smaller font size for link */
-  }
-
-  .socialButtons {
-    flex-direction: column; /* Stack social buttons */
-  }
-
-  .socialButtons button {
-    margin: 5px 0; /* Space between buttons */
-  }
+.alert {
+  margin-top: 15px; /* Space above alert */
+  color: #d43f52; /* Alert text color */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center alert message */
 }

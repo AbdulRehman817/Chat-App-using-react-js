@@ -6,8 +6,8 @@ import {
   GithubAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-} from "../../firebase/Firebase.js"; // Update import paths as n
-
+} from "../../firebase/Firebase.js"; // Update import paths as needed
+import "./login.css";
 const Login = () => {
   const email = useRef();
   const password = useRef();
@@ -28,9 +28,11 @@ const Login = () => {
         setWarning("Error signing in. Please try again.");
       });
   };
+
   const signupPage = () => {
     navigate("/Signup");
   };
+
   const SignupBtn = (e) => {
     e.preventDefault();
     setWarning("");
@@ -50,7 +52,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate("/"); //ye bhi hai iski waja se to nahi yeh sahi hai
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -65,34 +67,47 @@ const Login = () => {
   };
 
   return (
-    <div className="signupDiv">
-      <form>
-        <div>
-          <h1>Login Page</h1>
-        </div>
-        <input type="text" placeholder="Enter email" ref={email} />
-        <input type="password" placeholder="Enter password" ref={password} />
-        <a onClick={signupPage}>Don't have an account</a>
-        <input type="submit" onClick={SignupBtn} />
-        <span style={{ textAlign: "center", color: "white" }}>OR</span>
-        <div className="flex socialButtons">
+    <div className="loginContainer">
+      <form className="loginForm">
+        <h1>Login</h1>
+        <input
+          type="text"
+          placeholder="Email"
+          ref={email}
+          className="inputField"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          ref={password}
+          className="inputField"
+        />
+        <a onClick={signupPage} className="signupLink">
+          Don't have an account?
+        </a>
+        <button type="submit" className="submitBtn" onClick={SignupBtn}>
+          Log In
+        </button>
+        <span className="orText">OR</span>
+        <div className="flex socialButtons ">
           <button
             onClick={() => loginAuth(GoogleAuthProvider)}
             type="button"
-            className="googleBtn"
+            className="socialBtn googleBtn "
           >
             Sign in with Google
           </button>
+          <br />
           <button
             onClick={() => loginAuth(GithubAuthProvider)}
             type="button"
-            className="githubBtn"
+            className="socialBtn githubBtn"
           >
             Sign in with Github
           </button>
         </div>
         {warning && (
-          <div role="alert" className="alert alert-error">
+          <div role="alert" className="alert">
             <span>{warning}</span>
           </div>
         )}

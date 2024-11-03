@@ -1,82 +1,142 @@
-.signupDiv {
-  margin: 100px auto; /* Centered horizontally */
-  max-width: 700px; /* Max width for larger screens */
-  width: 90%; /* Full width on smaller screens */
-  background-color: #407074;
-  padding: 20px 30px 40px; /* Adjust padding */
-  border-radius: 12px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", sans-serif; /* Use a modern font */
+  background: linear-gradient(
+    135deg,
+    #f2f2f2,
+    #d1d1d1
+  ); /* Soft gradient background */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
 }
 
-.signupDiv form {
+.loginContainer {
+  width: 100%;
+  max-width: 400px; /* Max width for the form */
+  background: white; /* White background for the form */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 30px 40px; /* Padding for inner spacing */
+  text-align: center; /* Center text */
+}
+
+.loginForm {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 40px;
+  flex-direction: column; /* Vertical stacking of form elements */
 }
 
-.signupDiv h1 {
-  text-align: center;
-  color: white;
-  font-size: 24px; /* Smaller font size for better mobile appearance */
-  font-weight: bold;
+h1 {
+  font-size: 26px; /* Header font size */
+  color: #333; /* Dark color for text */
+  margin-bottom: 20px; /* Space below heading */
 }
 
-form input[type="text"],
-form input[type="password"],
-form input[type="submit"] {
-  height: 60px;
-  outline: none;
-  border: none;
-  padding: 0 15px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #333;
-  border-radius: 8px;
-  background-color: white;
-  width: 100%; /* Full width */
-  max-width: 600px; /* Max width */
-  margin: auto; /* Centered */
+.inputField {
+  margin: 10px 0; /* Space around input fields */
+  padding: 12px 15px; /* Padding for input fields */
+  border: 2px solid #ccc; /* Light gray border */
+  border-radius: 10px; /* Rounded corners */
+  width: 100%; /* Full width for inputs */
+  font-size: 16px; /* Font size for inputs */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transition effects */
 }
 
-form input[type="submit"] {
-  background-color: white;
-  cursor: pointer;
+.inputField:focus {
+  border-color: #d43f52; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(212, 63, 82, 0.5); /* Shadow on focus */
+  outline: none; /* Remove default outline */
 }
 
-a {
-  font-size: 15px;
-  cursor: pointer;
-  text-align: center; /* Center text for better mobile appearance */
+.signupLink {
+  margin: 10px 0; /* Space around the link */
+  color: #d43f52; /* Color for the link */
+  text-decoration: none; /* Remove underline */
+  font-weight: 500; /* Emphasize link text */
+  transition: color 0.3s; /* Smooth color transition */
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .signupDiv {
-    padding: 20px; /* Less padding on smaller devices */
-  }
-  form input[type="text"],
-  form input[type="password"],
-  form input[type="submit"] {
-    width: 100%; /* Full width on small screens */
-    max-width: none; /* Remove max width */
-  }
-  .flex {
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center; /* Center buttons */
-  }
-  .socialButtons button {
-    width: 100%; /* Full width for social buttons */
-    margin-bottom: 10px; /* Space between buttons */
-  }
+.signupLink:hover {
+  color: #b72e3f; /* Darker shade on hover */
 }
 
-@media (max-width: 480px) {
-  .signupDiv h1 {
-    font-size: 20px; /* Adjust font size for small devices */
-  }
+.submitBtn {
+  background-color: #d43f52; /* Primary button color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 12px; /* Padding for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; /* Full width for button */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+}
+
+.submitBtn:hover {
+  background-color: #b72e3f; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.orText {
+  margin: 15px 0; /* Space around OR text */
+  color: #777; /* Gray color for contrast */
+}
+
+.flex {
+  padding-bottom: 15px;
+
+  display: flex; /* Flex display for social buttons */
+  justify-content: space-between; /* Space between buttons */
+  width: 100%; /* Full width for container */
+}
+
+.socialButtons {
+  display: flex; /* Flex display for social buttons */
+  justify-content: space-between; /* Space between buttons */
+  width: 100%; /* Full width for container */
+}
+
+.socialBtn {
+  flex: 1; /* Allow buttons to expand */
+  margin: 0 5px; /* Space between social buttons */
+  padding: 12px; /* Padding for social buttons */
+  border-radius: 10px; /* Rounded corners */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+}
+
+.googleBtn {
+  background-color: #db4437; /* Google red color */
+}
+
+.githubBtn {
+  background-color: #333; /* GitHub dark color */
+}
+
+.googleBtn:hover {
+  background-color: #c13528; /* Darker shade on hover for Google */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.githubBtn:hover {
+  background-color: #444; /* Lighter shade on hover for GitHub */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.alert {
+  margin-top: 15px; /* Space above alert */
+  color: #d43f52; /* Alert text color */
+  font-weight: bold; /* Bold text */
+  text-align: center; /* Center alert message */
 }
